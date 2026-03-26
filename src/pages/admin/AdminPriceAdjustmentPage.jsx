@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Button } from '@/components/ui/button';
@@ -14,7 +13,7 @@ const AdminPriceAdjustmentPage = () => {
   const { toast } = useToast();
 
   const handleRunAdjustment = async () => {
-    if (!window.confirm("Are you sure you want to run the price adjustment script? This will modify product prices in the database.")) return;
+    if (!window.confirm("Are you sure you want to randomize all product prices? This will overwrite prices in the database.")) return;
     
     setIsRunning(true);
     setResults(null);
@@ -28,7 +27,7 @@ const AdminPriceAdjustmentPage = () => {
       if (res.success) {
         setResults(res);
         toast({
-          title: "Adjustment Complete",
+          title: "Randomization Complete",
           description: `Successfully updated ${res.updatedCount} products.`,
           className: "bg-green-600 text-white"
         });
@@ -45,7 +44,7 @@ const AdminPriceAdjustmentPage = () => {
   const handleDownloadCSV = () => {
     if (!results || !results.logs) return;
     
-    const headers = ["Product ID", "Name", "Category", "Old Price (₹)", "New Price (₹)", "Status"];
+    const headers = ["Product ID", "Name", "Category", "Old Price (INR)", "New Price (INR)", "Status"];
     const rows = results.logs.map(log => [
       log.id,
       `"${log.name.replace(/"/g, '""')}"`,
@@ -73,10 +72,10 @@ const AdminPriceAdjustmentPage = () => {
       <div>
         <h1 className="text-3xl font-serif font-bold text-[#2C2C2C] flex items-center gap-3">
           <IndianRupee className="w-8 h-8 text-green-600" />
-          Global Price Adjustment
+          Global Price Randomization
         </h1>
         <p className="text-gray-500 mt-2">
-          Enforce pricing policies across all products. This operation will scan the database and adjust prices to fall within specified min/max bounds for their respective categories.
+          Randomize all product prices in the database to a range of INR 20,000 to INR 200,000.
         </p>
       </div>
 
@@ -85,16 +84,8 @@ const AdminPriceAdjustmentPage = () => {
           <div className="mb-6 p-4 bg-amber-50 border border-amber-200 text-amber-800 rounded-lg flex items-start gap-3 text-sm">
              <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
              <div>
-                <strong>Warning:</strong> This process will permanently overwrite product prices in the database if they fall outside the allowed ranges.
-                <ul className="list-disc pl-5 mt-2 space-y-1">
-                  <li>Global Range: ₹200 to ₹200,000</li>
-                  <li>Furniture: ₹5,000 - ₹150,000</li>
-                  <li>Coins: ₹500 - ₹50,000</li>
-                  <li>Paintings: ₹2,000 - ₹100,000</li>
-                  <li>Sculptures: ₹3,000 - ₹120,000</li>
-                  <li>Jewelry: ₹1,000 - ₹200,000</li>
-                  <li>Watches: ₹5,000 - ₹180,000</li>
-                </ul>
+                <strong>Warning:</strong> This process will permanently overwrite all product prices in the database.
+                <p className="mt-2">Each product will be assigned a random INR price between INR 20,000 and INR 200,000.</p>
              </div>
           </div>
 
@@ -104,9 +95,9 @@ const AdminPriceAdjustmentPage = () => {
             className="w-full py-6 text-lg bg-[#8B4513] hover:bg-[#5C4033] text-white mb-6"
           >
             {isRunning ? (
-              <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Adjusting ({progress.current}/{progress.total})...</>
+              <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Randomizing ({progress.current}/{progress.total})...</>
             ) : (
-              <><IndianRupee className="w-5 h-5 mr-2" /> Run Price Adjustment</>
+              <><IndianRupee className="w-5 h-5 mr-2" /> Randomize Product Prices</>
             )}
           </Button>
 
@@ -114,7 +105,7 @@ const AdminPriceAdjustmentPage = () => {
             <div className="space-y-4">
               <div className="flex justify-between items-center bg-gray-50 p-4 rounded-lg border">
                 <div>
-                  <h3 className="font-bold text-gray-800">Adjustment Summary</h3>
+                  <h3 className="font-bold text-gray-800">Randomization Summary</h3>
                   <p className="text-sm text-gray-600">{results.updatedCount} products updated out of {progress.total} scanned.</p>
                 </div>
                 {results.logs.length > 0 && (
@@ -157,7 +148,7 @@ const AdminPriceAdjustmentPage = () => {
                 </div>
               ) : (
                 <div className="text-center p-8 bg-gray-50 rounded-lg text-gray-500 border border-dashed">
-                  No prices needed adjustment. All products are within their allowed ranges.
+                  No products were updated.
                 </div>
               )}
             </div>
