@@ -11,7 +11,7 @@ const ComingSoonPage = () => {
         <title>Relicsphere - Coming Soon | Discover Timeless Antique Treasures</title>
         <meta 
           name="description" 
-          content="Relicsphere is opening soon. Sign up to be notified when we launch our collection of rare, timeless antique treasures." 
+          content="E commerce stores for antique Shop" 
         />
       </Helmet>
 
@@ -81,10 +81,7 @@ const ComingSoonPage = () => {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="text-lg md:text-xl text-[#F5E6D3]/90 mb-12 max-w-2xl mx-auto leading-relaxed"
             >
-              Step into a world where history whispers through every piece. 
-              Relicsphere curates exceptional antique treasures, each with a story to tell. 
-              Discover rare collectibles, vintage furniture, and timeless artifacts that 
-              transform your space into a gallery of refined elegance.
+              E commerce stores for antique Shop
             </motion.p>
 
             {/* Email Signup Form */}

@@ -199,6 +199,7 @@ const ShopPage = () => {
     <div className="min-h-screen bg-[#FAF5EF] py-12">
       <Helmet>
         <title>Shop | Relicsphere</title>
+        <meta name="description" content="E commerce stores for antique Shop" />
       </Helmet>
 
       <div className="container mx-auto px-4">

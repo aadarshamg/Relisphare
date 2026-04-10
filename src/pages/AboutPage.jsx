@@ -15,7 +15,7 @@ const AboutPage = () => {
     <div className="min-h-screen bg-[#FAF5EF]">
       <Helmet>
         <title>About Us | Relicsphere</title>
-        <meta name="description" content="Learn about Relicsphere's mission to preserve history through authentic antiques and vintage treasures." />
+        <meta name="description" content="E commerce stores for antique Shop" />
       </Helmet>
 
       {/* Hero Section */}
@@ -31,7 +31,7 @@ const AboutPage = () => {
           >
             <h1 className="text-5xl md:text-7xl font-bold mb-6 text-[#D4AF37] embassy-font">Preserving History</h1>
             <p className="text-xl md:text-2xl font-light max-w-3xl mx-auto text-[#DEB887]">
-              Bridging the gap between the past and the present through the art of collection.
+              E commerce stores for antique Shop
             </p>
           </motion.div>
         </div>
@@ -45,9 +45,7 @@ const AboutPage = () => {
               <span className="text-[#8B4513] font-serif italic text-lg tracking-widest">OUR MISSION</span>
               <h2 className="text-4xl font-bold text-[#2C2C2C] embassy-font">Honoring the Past</h2>
               <p className="text-[#5C4033] leading-relaxed text-lg">
-                At Relicsphere, we believe that every artifact tells a story. Our mission is to rescue, restore, and rehome 
-                forgotten treasures from around the world. We are not just selling objects; we are custodians of history, 
-                ensuring that the craftsmanship and artistry of bygone eras continue to be appreciated.
+                E commerce stores for antique Shop
               </p>
               <p className="text-[#5C4033] leading-relaxed text-lg">
                 Whether it's a Victorian coin, a mid-century sculpture, or a piece of colonial furniture, each item in our 

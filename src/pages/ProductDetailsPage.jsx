@@ -61,7 +61,10 @@ const ProductDetailsPage = () => {
 
   return (
     <div className="min-h-screen bg-[#FAF5EF] py-12">
-      <Helmet><title>{product.name} | Relicsphere</title></Helmet>
+      <Helmet>
+        <title>{product.name} | Relicsphere</title>
+        <meta name="description" content="E commerce stores for antique Shop" />
+      </Helmet>
       <div className="container mx-auto px-4">
         <Link to="/shop" className="inline-flex items-center text-[#8B4513] hover:underline mb-8">
           <ArrowLeft className="w-4 h-4 mr-2" /> Back to Shop

@@ -6,6 +6,7 @@ const PrivacyPolicyPage = () => {
     <div className="min-h-screen bg-[#FAF5EF] py-12">
       <Helmet>
         <title>Privacy Policy | Relicsphere</title>
+        <meta name="description" content="E commerce stores for antique Shop" />
       </Helmet>
 
       <div className="container mx-auto px-4 max-w-4xl">

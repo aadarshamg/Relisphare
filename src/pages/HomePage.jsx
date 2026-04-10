@@ -18,7 +18,7 @@ const HomePage = () => {
     <>
       <Helmet>
         <title>Relicsphere | Timeless Antique Treasures</title>
-        <meta name="description" content="Discover rare antiques, vintage furniture, and timeless collectibles at Relicsphere." />
+        <meta name="description" content="E commerce stores for antique Shop" />
       </Helmet>
 
       {/* Hero Section */}
@@ -61,7 +61,7 @@ const HomePage = () => {
               Relicsphere
             </h1>
             <p className="text-xl md:text-2xl text-[#DEB887] mb-8 max-w-2xl mx-auto font-light tracking-wide">
-              Where history lives on. Discover an exquisite collection of rare artifacts and timeless elegance.
+              E commerce stores for antique Shop
             </p>
             <Link to="/shop">
               <Button size="lg" className="bg-[#D4AF37] hover:bg-[#B8860B] text-[#2C2C2C] font-bold text-lg px-8 py-6 rounded-full transition-transform hover:scale-105 shadow-[0_0_15px_rgba(212,175,55,0.5)]">

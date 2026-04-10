@@ -63,8 +63,7 @@ const ContactPage = () => {
         <div className="text-center mb-16 max-w-2xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-[#2C2C2C] mb-6">Get in Touch</h1>
           <p className="text-[#8B4513] text-lg leading-relaxed">
-            Have a question about a rare find or need assistance with your order? 
-            Our dedicated team is here to assist you.
+            E commerce stores for antique Shop
           </p>
         </div>
 

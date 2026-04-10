@@ -40,7 +40,10 @@ const AdminLoginPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#2C2C2C] px-4 font-sans py-12">
-      <Helmet><title>Admin Login | Relicsphere</title></Helmet>
+      <Helmet>
+        <title>Admin Login | Relicsphere</title>
+        <meta name="description" content="E commerce stores for antique Shop" />
+      </Helmet>
       
       <div className="w-full max-w-md bg-white rounded-xl shadow-2xl overflow-hidden">
         <div className="bg-[#D4AF37] p-6 text-center">

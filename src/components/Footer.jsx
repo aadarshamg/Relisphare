@@ -11,7 +11,7 @@ const Footer = () => {
   const supportEmail = contactInfo?.support_email || 'support@relicsphere.com';
   const contactEmail = contactInfo?.contact_email || 'contact@relicsphere.com';
   const siteName = contactInfo?.site_name || 'Relicsphere';
-  const description = contactInfo?.description || 'Curating history\'s finest whispers. We bring you authenticated, timeless treasures from around the globe.';
+  const description = contactInfo?.description || 'E commerce stores for antique Shop';
 
   return (
     <footer className="bg-[#2C2C2C] text-[#F5E6D3] pt-16 pb-8 border-t-4 border-[#D4AF37]">

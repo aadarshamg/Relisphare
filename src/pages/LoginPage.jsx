@@ -33,7 +33,10 @@ const LoginPage = () => {
     <div className="min-h-screen flex items-center justify-center bg-[#2C2C2C] px-4" 
       style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1642027180032-f66feee943d8)', backgroundSize: 'cover', backgroundBlendMode: 'multiply' }}
     >
-      <Helmet><title>Login | Relicsphere</title></Helmet>
+      <Helmet>
+        <title>Login | Relicsphere</title>
+        <meta name="description" content="E commerce stores for antique Shop" />
+      </Helmet>
 
       <div className="w-full max-w-md bg-[#F5E6D3] p-8 rounded-xl shadow-2xl border-2 border-[#D4AF37]">
         <div className="text-center mb-8">
