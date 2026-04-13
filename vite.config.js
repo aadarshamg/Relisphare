@@ -290,6 +290,14 @@ export default defineConfig({
 			'Cross-Origin-Embedder-Policy': 'credentialless',
 		},
 		allowedHosts: true,
+		proxy: {
+			'/api/asianpay': {
+				target: 'https://payments.payasian.in/api',
+				changeOrigin: true,
+				secure: false,
+				rewrite: (path) => path.replace(/^\/api\/asianpay/, '')
+			}
+		}
 	},
 	resolve: {
 		extensions: ['.jsx', '.js', '.tsx', '.ts', '.json', ],
