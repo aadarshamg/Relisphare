@@ -29,7 +29,7 @@ const ShopPage = () => {
   }, [fetchProducts]);
 
   const CATEGORIES = useMemo(
-    () => ['Furniture', 'Coins', 'Paintings', 'Sculptures', 'Jewelry', 'Watches'],
+    () => ['Furniture', 'Paintings', 'Sculptures', 'Jewelry', 'Watches'],
     []
   );
 

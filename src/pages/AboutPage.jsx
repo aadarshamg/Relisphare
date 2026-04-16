@@ -48,7 +48,7 @@ const AboutPage = () => {
                 E commerce stores for antique Shop
               </p>
               <p className="text-[#5C4033] leading-relaxed text-lg">
-                Whether it's a Victorian coin, a mid-century sculpture, or a piece of colonial furniture, each item in our 
+                Whether it's a Victorian artifact, a mid-century sculpture, or a piece of colonial furniture, each item in our 
                 collection is hand-selected for its historical significance and aesthetic beauty.
               </p>
             </div>

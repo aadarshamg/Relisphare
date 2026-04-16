@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 
 const categories = [
   { name: 'Furniture', image: 'https://images.unsplash.com/photo-1581761391840-8a1fdf090c1a' },
-  { name: 'Coins', image: 'https://images.unsplash.com/photo-1494122474412-aeaf73d11da8' },
+
   { name: 'Paintings', image: 'https://images.unsplash.com/photo-1630002931917-964ccb95d0a5' },
   { name: 'Sculptures', image: 'https://images.unsplash.com/photo-1696593165785-c28a6501d9aa' },
   { name: 'Jewelry', image: 'https://images.unsplash.com/photo-1637313172311-7c1eee620d89' },

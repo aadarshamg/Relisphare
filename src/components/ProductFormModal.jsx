@@ -73,7 +73,7 @@ const ProductFormModal = ({ onProductAdded }) => {
               <Select name="category" onValueChange={(val) => handleValueChange('category', val)}>
                 <SelectTrigger><SelectValue placeholder="Select Category" /></SelectTrigger>
                 <SelectContent className="bg-white">
-                  {['Furniture', 'Coins', 'Paintings', 'Sculptures', 'Jewelry', 'Watches'].map(c => (
+                  {['Furniture', 'Paintings', 'Sculptures', 'Jewelry', 'Watches'].map(c => (
                     <SelectItem key={c} value={c}>{c}</SelectItem>
                   ))}
                 </SelectContent>

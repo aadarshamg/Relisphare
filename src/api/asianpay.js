@@ -34,7 +34,14 @@ export const initiatePayment = async (orderInfo, userDetails) => {
       body: JSON.stringify(payload)
     });
 
-    const data = await response.json();
+    const textData = await response.text();
+    let data;
+    try {
+      data = textData ? JSON.parse(textData) : {};
+    } catch {
+      throw new Error(`API Parse Error: ${textData.substring(0, 50)}`);
+    }
+
     if (data.success && data.data) {
       return data.data; // expecting intent_url, order_id, etc.
     } else {
@@ -59,7 +66,14 @@ export const checkPaymentStatus = async (asianPayOrderId) => {
       }
     });
 
-    const data = await response.json();
+    const textData = await response.text();
+    let data;
+    try {
+      data = textData ? JSON.parse(textData) : {};
+    } catch {
+      throw new Error(`API Parse Error: ${textData.substring(0, 50)}`);
+    }
+
     if (data.success && data.data) {
       return data.data; // Expecting { order_status: "PAID", ... }
     } else {

@@ -129,7 +129,10 @@ const CheckoutPage = () => {
                 </label>
                 <label className={`flex items-center p-4 border rounded-xl cursor-pointer transition-colors ${paymentMethod === 'cod' ? 'border-[#8B4513] bg-[#8B4513]/5' : 'hover:border-gray-300'}`}>
                   <input type="radio" name="payment_method" value="cod" checked={paymentMethod === 'cod'} onChange={() => setPaymentMethod('cod')} className="mr-4 h-5 w-5 text-[#8B4513] focus:ring-[#8B4513]" />
-                  <span className="font-medium text-lg">Cash on Delivery</span>
+                  <div className="flex-1 flex justify-between items-center">
+                    <span className="font-medium text-lg">Cash on Delivery</span>
+                    <span className="text-sm font-bold text-[#8B4513] bg-[#8B4513]/10 px-2 py-1 rounded">Available</span>
+                  </div>
                 </label>
               </div>
             </div>
