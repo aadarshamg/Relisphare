@@ -27,6 +27,7 @@ import ContactPage from '@/pages/ContactPage';
 import TermsAndConditionsPage from '@/pages/TermsAndConditionsPage';
 import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage';
 import RefundAndCancellationPage from '@/pages/RefundAndCancellationPage';
+import ConsultancyPage from '@/pages/ConsultancyPage';
 
 // Lazy Loaded Admin Components
 const AdminLayout = React.lazy(() => import('@/components/admin/AdminLayout'));
@@ -94,6 +95,7 @@ function App() {
                                                 <Route path="/terms" element={<TermsAndConditionsPage />} />
                                                 <Route path="/privacy" element={<PrivacyPolicyPage />} />
                                                 <Route path="/refund-policy" element={<RefundAndCancellationPage />} />
+                                                <Route path="/consultancy" element={<ConsultancyPage />} />
                                             </Routes>
                                         </main>
                                         <Footer />
