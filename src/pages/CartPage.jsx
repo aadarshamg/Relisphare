@@ -115,10 +115,14 @@ const CartPage = () => {
                   <span>Tax Estimate (8%)</span>
                   <span>{formatRupees(getCartTotal() * 0.08)}</span>
                 </div>
+                <div className="flex justify-between">
+                  <span>Consultancy Fee</span>
+                  <span>{formatRupees(500)}</span>
+                </div>
                 <div className="h-px bg-gray-200 my-4"></div>
                 <div className="flex justify-between text-xl font-bold text-[#2C2C2C]">
                   <span>Total</span>
-                  <span>{formatRupees(getCartTotal() * 1.08)}</span>
+                  <span>{formatRupees(getCartTotal() * 1.08 + 500)}</span>
                 </div>
               </div>
               

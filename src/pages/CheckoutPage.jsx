@@ -49,7 +49,7 @@ const CheckoutPage = () => {
     setLoading(true);
 
     try {
-      const totalAmount = getCartTotal() * 1.08;
+      const totalAmount = getCartTotal() * 1.08 + 500;
       
       const orderItems = cart.map(item => ({
         product_id: item.id,
@@ -162,9 +162,19 @@ const CheckoutPage = () => {
                   </div>
                 ))}
               </div>
-              <div className="border-t pt-4 flex justify-between font-bold text-lg">
+              <div className="space-y-2 border-t pt-4 text-sm text-[#5C4033]">
+                <div className="flex justify-between">
+                  <span>Tax (8%)</span>
+                  <span>{formatRupees(getCartTotal() * 0.08)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Consultancy Fee</span>
+                  <span>{formatRupees(500)}</span>
+                </div>
+              </div>
+              <div className="border-t pt-4 flex justify-between font-bold text-lg mt-2">
                 <span>Total (Inc. Tax)</span>
-                <span>{formatRupees(getCartTotal() * 1.08)}</span>
+                <span>{formatRupees(getCartTotal() * 1.08 + 500)}</span>
               </div>
             </div>
             <div className="bg-white p-8 rounded-xl shadow-sm">
@@ -179,7 +189,7 @@ const CheckoutPage = () => {
 
       {showAsianPay && (
         <AsianPaySimulator 
-          amount={getCartTotal() * 1.08}
+          amount={getCartTotal() * 1.08 + 500}
           orderId={showAsianPay} // passed down as order ID
           userDetails={{ email: formData.email, phone: formData.phone }}
           onPaymentSuccess={handlePaymentSuccess}
