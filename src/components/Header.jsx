@@ -34,7 +34,7 @@ const Header = () => {
         {/* Logo */}
         <Link to="/" className="text-3xl font-bold text-[#8B4513] tracking-wider flex items-center gap-3 group">
           <img 
-            src="https://horizons-cdn.hostinger.com/037bde25-b36f-425a-8f08-2d594dea4bfb/672903cb83c6bc20266416e73729efb7.png"
+            src="/relicsphere-logo.png"
             alt="Relicsphere Logo"
             className="h-10 md:h-12 w-auto object-contain transition-all duration-300 group-hover:scale-110 group-hover:opacity-90"
           />

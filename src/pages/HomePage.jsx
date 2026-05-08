@@ -38,7 +38,7 @@ const HomePage = () => {
             className="mb-8"
           >
             <motion.img
-              src="https://horizons-cdn.hostinger.com/037bde25-b36f-425a-8f08-2d594dea4bfb/672903cb83c6bc20266416e73729efb7.png"
+              src="/relicsphere-logo.png"
               alt="Relicsphere Logo"
               className="h-24 md:h-32 w-auto mx-auto drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]"
               animate={{ y: [0, -10, 0] }}

@@ -21,7 +21,7 @@ const Footer = () => {
           <div className="space-y-4 md:col-span-1">
             <Link to="/" className="text-3xl font-serif font-bold text-[#F5E6D3] flex items-center gap-3 hover:opacity-90 transition-opacity duration-300">
                <img 
-                src="https://horizons-cdn.hostinger.com/037bde25-b36f-425a-8f08-2d594dea4bfb/672903cb83c6bc20266416e73729efb7.png"
+                src="/relicsphere-logo.png"
                 alt="Relicsphere Logo"
                 className="h-14 w-auto object-contain"
               />
