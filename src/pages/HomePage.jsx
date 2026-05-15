@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 
 const categories = [
   { name: 'Furniture', image: 'https://images.unsplash.com/photo-1581761391840-8a1fdf090c1a' },
-
+  { name: 'Coins', image: '/coin-collection.jpeg' },
   { name: 'Paintings', image: 'https://images.unsplash.com/photo-1630002931917-964ccb95d0a5' },
   { name: 'Sculptures', image: 'https://images.unsplash.com/photo-1696593165785-c28a6501d9aa' },
   { name: 'Jewelry', image: 'https://images.unsplash.com/photo-1637313172311-7c1eee620d89' },
@@ -87,7 +87,46 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      {/* Coin Collection */}
+      <section className="py-20 bg-[#FFF8EE]">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="overflow-hidden rounded-xl shadow-xl border border-[#D4AF37]/30"
+            >
+              <img
+                src="/coin-collection.jpeg"
+                alt="Relicsphere coin collection"
+                className="w-full aspect-[4/3] object-cover"
+                loading="lazy"
+              />
+            </motion.div>
 
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              <span className="text-[#8B4513] font-serif italic tracking-widest">- COIN COLLECTION -</span>
+              <h2 className="text-4xl md:text-5xl font-bold text-[#2C2C2C] embassy-font">Rare Coins for Collectors</h2>
+              <p className="text-lg text-[#5C4033] leading-relaxed">
+                Explore collectible coins selected for history, condition, and character. Availability and final pricing depend on the individual coin, rarity, and inspection details.
+              </p>
+              <Link to="/contact">
+                <Button className="bg-[#8B4513] hover:bg-[#5C4033] text-white text-lg px-8 py-6">
+                  Contact for pricing <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
       {/* Categories Showcase */}
       <section className="py-20 bg-gradient-to-b from-[#F5E6D3] to-[#E8DCC4]">
         <div className="container mx-auto px-4">
@@ -146,3 +185,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
