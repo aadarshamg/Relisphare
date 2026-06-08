@@ -194,6 +194,13 @@ export const getImagesForProduct = (product) => {
   return matchedType ? PRODUCT_TYPE_IMAGES[matchedType] : getImagesForCategory(product?.category);
 };
 
+export const getProductImageGroup = (product) => {
+  const name = product?.name || '';
+  const matchedType = Object.keys(PRODUCT_TYPE_IMAGES).find((type) => name.includes(type));
+
+  return matchedType || product?.category || 'Uncategorized';
+};
+
 export const assignImagesToProducts = (products) => {
   const imageCounters = {};
   
@@ -202,7 +209,7 @@ export const assignImagesToProducts = (products) => {
     
     if (images.length === 0) return product;
     
-    const counterKey = `${product.category || 'Uncategorized'}:${product.name || ''}`;
+    const counterKey = getProductImageGroup(product);
     if (imageCounters[counterKey] === undefined) {
       imageCounters[counterKey] = 0;
     }
