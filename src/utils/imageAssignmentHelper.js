@@ -201,20 +201,39 @@ export const getProductImageGroup = (product) => {
   return matchedType || product?.category || 'Uncategorized';
 };
 
+const getImageSearchQuery = (product) => {
+  const imageGroup = getProductImageGroup(product);
+  const category = product?.category || 'antique';
+
+  return `${imageGroup} ${category}`.toLowerCase().replace(/[^a-z0-9]+/g, ',');
+};
+
+const getUniqueFallbackImage = (product, imageIndex) => {
+  const query = getImageSearchQuery(product);
+  const seed = encodeURIComponent(`${getProductImageGroup(product)}-${product?.id || imageIndex}-${imageIndex}`);
+
+  return `https://source.unsplash.com/800x600/?${query}&sig=${seed}`;
+};
+
 export const assignImagesToProducts = (products) => {
   const imageCounters = {};
+  const usedImages = new Set();
   
   return products.map(product => {
     const images = getImagesForProduct(product);
-    
-    if (images.length === 0) return product;
-    
     const counterKey = getProductImageGroup(product);
+
     if (imageCounters[counterKey] === undefined) {
       imageCounters[counterKey] = 0;
     }
     
-    const assignedImage = images[imageCounters[counterKey] % images.length];
+    const imageIndex = imageCounters[counterKey];
+    const candidateImage = images[imageIndex];
+    const assignedImage = candidateImage && !usedImages.has(candidateImage)
+      ? candidateImage
+      : getUniqueFallbackImage(product, imageIndex);
+
+    usedImages.add(assignedImage);
     imageCounters[counterKey]++;
     
     return {
