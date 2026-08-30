@@ -107,19 +107,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-[#D4AF37]/20 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-[#DEB887]/60 text-center gap-4">
+        <div className="border-t border-[#D4AF37]/20 pt-8 flex flex-col md:flex-row justify-center items-center text-sm text-[#DEB887]/60 text-center gap-4">
           <p>&copy; {new Date().getFullYear()} {siteName}. All rights reserved.</p>
-          <p className="flex items-center gap-1">
-            Developed and Managed by{' '}
-            <a 
-              href="https://falqonstudio.com/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-[#D4AF37] hover:text-[#F5E6D3] transition-colors duration-300 font-semibold"
-            >
-              Falqon Studio
-            </a>
-          </p>
         </div>
       </div>
     </footer>
