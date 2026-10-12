@@ -11,7 +11,8 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sh
 import { useDebounce } from '@/lib/utils';
 import CategorySection from '@/components/CategorySection';
 
-const BASE_CATEGORIES = ['Furniture', 'Coins', 'Paintings', 'Sculptures', 'Jewelry', 'Watches'];
+const BASE_CATEGORIES = ['Collectibles', 'Furniture', 'Coins', 'Paintings', 'Sculptures', 'Jewelry', 'Watches'];
+const TOP_PRODUCTS = ['Vernacular', 'Compass', 'Boat'];
 const UNCATEGORIZED = 'Uncategorized';
 
 const ShopPage = () => {
@@ -113,6 +114,14 @@ const ShopPage = () => {
       const prodCat = bustedProduct.category?.trim() || UNCATEGORIZED;
       const match = categoriesToShow.find((c) => c.toLowerCase() === prodCat.toLowerCase());
       if (match) groups[match].push(bustedProduct);
+    });
+
+    Object.values(groups).forEach((group) => {
+      group.sort((a, b) => {
+        const aIndex = TOP_PRODUCTS.indexOf(a.name);
+        const bIndex = TOP_PRODUCTS.indexOf(b.name);
+        return (aIndex < 0 ? TOP_PRODUCTS.length : aIndex) - (bIndex < 0 ? TOP_PRODUCTS.length : bIndex);
+      });
     });
 
     return groups;
