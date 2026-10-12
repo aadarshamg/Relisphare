@@ -7,7 +7,7 @@ const Footer = () => {
   const { contactInfo } = useContactInfo();
 
   const address = contactInfo?.address || '114 BLDG NO 03 86 CENTRAL,\nANDHERI GHATKOPAR LINK RD,\nMumbai- 400086, Maharashtra';
-  const phone = contactInfo?.contact_phone || '+91 77386 08903';
+  const phone = contactInfo?.phone || '+91 77386 08903';
   const supportEmail = contactInfo?.support_email || 'support@relicsphere.com';
   const contactEmail = contactInfo?.contact_email || 'contact@relicsphere.com';
   const siteName = contactInfo?.site_name || 'Relicsphere';

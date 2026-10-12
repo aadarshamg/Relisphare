@@ -7,7 +7,7 @@ import { useContactInfo } from '@/hooks/useContactInfo';
 const AboutPage = () => {
   const { contactInfo, loading } = useContactInfo();
 
-  const phone = contactInfo?.contact_phone || '+91 77386 08903';
+  const phone = contactInfo?.phone || '+91 77386 08903';
   const supportEmail = contactInfo?.support_email || 'support@relicsphere.com';
   const contactEmail = contactInfo?.contact_email || 'contact@relicsphere.com';
 
