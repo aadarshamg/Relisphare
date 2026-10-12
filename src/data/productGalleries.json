@@ -1,0 +1,56 @@
+{
+  "8db4f0bd-3fcf-4177-a9fc-f882ddc04206": [
+    {
+      "id": "boat-1",
+      "image_url": "/products/october-2026/boat/1.jpg"
+    },
+    {
+      "id": "boat-2",
+      "image_url": "/products/october-2026/boat/2.jpg"
+    },
+    {
+      "id": "boat-3",
+      "image_url": "/products/october-2026/boat/3.jpg"
+    },
+    {
+      "id": "boat-4",
+      "image_url": "/products/october-2026/boat/4.jpg"
+    }
+  ],
+  "4acd57b1-6f38-440f-9bb0-dc031180fe1f": [
+    {
+      "id": "compass-1",
+      "image_url": "/products/october-2026/compass/1.jpg"
+    }
+  ],
+  "17ebdcc9-7c29-488a-a7fe-bc235b726ba2": [
+    {
+      "id": "gold-horse-1",
+      "image_url": "/products/october-2026/gold-horse/1.jpg"
+    },
+    {
+      "id": "gold-horse-2",
+      "image_url": "/products/october-2026/gold-horse/2.jpg"
+    }
+  ],
+  "be527897-35eb-4bff-b26e-b9dd3a1813b2": [
+    {
+      "id": "handcarto-1",
+      "image_url": "/products/october-2026/handcarto/1.jpg"
+    }
+  ],
+  "c7d92c9a-6457-424d-b2dc-ff6bcdaaeebd": [
+    {
+      "id": "vernacular-1",
+      "image_url": "/products/october-2026/vernacular/1.jpg"
+    },
+    {
+      "id": "vernacular-2",
+      "image_url": "/products/october-2026/vernacular/2.jpg"
+    },
+    {
+      "id": "vernacular-3",
+      "image_url": "/products/october-2026/vernacular/3.jpg"
+    }
+  ]
+}

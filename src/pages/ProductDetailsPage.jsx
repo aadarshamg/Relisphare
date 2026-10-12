@@ -9,6 +9,7 @@ import { ShoppingCart, ArrowLeft, Package, Clock, Globe } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { formatINR } from '@/utils/currencyFormatter';
 import { getOptimizedImageUrl, getResponsiveImageSrcSet } from '@/utils/imageCompression';
+import productGalleries from '@/data/productGalleries.json';
 
 const ProductImage = memo(({ src, alt, isActive }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -41,6 +42,11 @@ const ProductDetailsPage = () => {
   const { toast } = useToast();
 
   useEffect(() => {
+    setActiveImage(0);
+    setProduct(null);
+  }, [id]);
+
+  useEffect(() => {
     const found = getProductById(id);
     if (found) setProduct(found);
   }, [id, getProductById]);
@@ -57,7 +63,7 @@ const ProductDetailsPage = () => {
 
   if (!product) return <div className="min-h-screen flex items-center justify-center">Product not found.</div>;
 
-  const images = product.image_url ? [{ id: 'main', image_url: product.image_url }] : (product.product_images || []);
+  const images = productGalleries[product.id] || (product.image_url ? [{ id: 'main', image_url: product.image_url }] : (product.product_images || []));
 
   return (
     <div className="min-h-screen bg-[#FAF5EF] py-12">
@@ -77,7 +83,17 @@ const ProductDetailsPage = () => {
                 <ProductImage key={img.id} src={img.image_url} alt={product.name} isActive={activeImage === idx} />
               )) : <ProductImage src={null} alt={product.name} isActive={true} />}
             </div>
-            {/* Gallery Thumbnails could go here if multiple images */}
+            {images.length > 1 && (
+              <div className="flex gap-3 overflow-x-auto" aria-label="Product photos">
+                {images.map((img, idx) => (
+                  <button key={img.id} type="button" onClick={() => setActiveImage(idx)}
+                    aria-label={`View ${product.name} photo ${idx + 1}`} aria-pressed={activeImage === idx}
+                    className={`h-20 w-20 shrink-0 overflow-hidden rounded-lg border-2 ${activeImage === idx ? 'border-[#8B4513]' : 'border-transparent'}`}>
+                    <img src={img.image_url} alt={`${product.name}, view ${idx + 1}`} className="h-full w-full object-contain bg-white" loading="lazy" />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
           {/* Details */}
           <div className="space-y-8">
