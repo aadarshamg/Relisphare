@@ -1,4 +1,5 @@
-import React, { useState, useMemo, useCallback, useEffect } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useData } from '@/contexts/DataContext';
 import { Helmet } from 'react-helmet';
 import { Filter, Search, IndianRupee } from 'lucide-react';
@@ -10,10 +11,13 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sh
 import { useDebounce } from '@/lib/utils';
 import CategorySection from '@/components/CategorySection';
 
+const BASE_CATEGORIES = ['Furniture', 'Coins', 'Paintings', 'Sculptures', 'Jewelry', 'Watches'];
+const UNCATEGORIZED = 'Uncategorized';
+
 const ShopPage = () => {
-  const { products, fetchProducts } = useData();
+  const { products, productsError, loading, fetchProducts } = useData();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategories, setSelectedCategories] = useState([]);
   const [minPriceInput, setMinPriceInput] = useState('');
   const [maxPriceInput, setMaxPriceInput] = useState('');
   const [isFilterSheetOpen, setIsFilterSheetOpen] = useState(false);
@@ -24,20 +28,41 @@ const ShopPage = () => {
 
   const cacheBuster = localStorage.getItem('imageCacheBuster') || '';
 
-  useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
+  const CATEGORIES = useMemo(() => {
+    const list = [...BASE_CATEGORIES];
+    (products || []).forEach((p) => {
+      const cat = p.category?.trim() || UNCATEGORIZED;
+      if (!list.some((c) => c.toLowerCase() === cat.toLowerCase())) list.push(cat);
+    });
+    return list;
+  }, [products]);
 
-  const CATEGORIES = useMemo(
-    () => ['Furniture', 'Paintings', 'Sculptures', 'Jewelry', 'Watches'],
-    []
+  // Selected categories live in the URL so links like /shop?category=Coins work
+  const selectedCategories = useMemo(() => {
+    const fromUrl = searchParams.getAll('category').map((c) => c.toLowerCase());
+    return CATEGORIES.filter((c) => fromUrl.includes(c.toLowerCase()));
+  }, [searchParams, CATEGORIES]);
+
+  const setSelectedCategories = useCallback(
+    (categories) => {
+      const next = new URLSearchParams(searchParams);
+      next.delete('category');
+      categories.forEach((c) => next.append('category', c));
+      setSearchParams(next, { replace: true });
+    },
+    [searchParams, setSearchParams]
   );
 
-  const handleCategoryChange = useCallback((category) => {
-    setSelectedCategories((prev) =>
-      prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]
-    );
-  }, []);
+  const handleCategoryChange = useCallback(
+    (category) => {
+      setSelectedCategories(
+        selectedCategories.includes(category)
+          ? selectedCategories.filter((c) => c !== category)
+          : [...selectedCategories, category]
+      );
+    },
+    [selectedCategories, setSelectedCategories]
+  );
 
   const priceStats = useMemo(() => {
     if (!products || products.length === 0) return { min: 20000, max: 200000 };
@@ -80,16 +105,14 @@ const ShopPage = () => {
       const bustedProduct = {
         ...product,
         image_url:
-          product.image_url && cacheBuster
+          product.image_url && cacheBuster && !product.image_url.startsWith('data:')
             ? `${product.image_url}${product.image_url.includes('?') ? '&' : '?'}v=${cacheBuster}`
             : product.image_url
       };
 
-      const prodCat = bustedProduct.category;
-      if (prodCat) {
-        const match = categoriesToShow.find((c) => c.toLowerCase() === prodCat.toLowerCase());
-        if (match) groups[match].push(bustedProduct);
-      }
+      const prodCat = bustedProduct.category?.trim() || UNCATEGORIZED;
+      const match = categoriesToShow.find((c) => c.toLowerCase() === prodCat.toLowerCase());
+      if (match) groups[match].push(bustedProduct);
     });
 
     return groups;
@@ -163,7 +186,7 @@ const ShopPage = () => {
         <Label className="mb-3 block text-gray-700">Categories</Label>
         <div className="space-y-3">
           {CATEGORIES.map((cat) => {
-            const checkboxId = `${idPrefix}-${cat.toLowerCase()}`;
+            const checkboxId = `${idPrefix}-${cat.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
             return (
               <div key={cat} className="flex items-center space-x-3">
                 <Checkbox
@@ -240,7 +263,19 @@ const ShopPage = () => {
           </aside>
 
           <main className="w-full lg:w-3/4 space-y-8">
-            {Object.values(groupedProducts).every((group) => group.length === 0) ? (
+            {productsError && products.length === 0 ? (
+              <div className="text-center py-20 bg-white rounded-xl shadow-sm border border-gray-100">
+                <p className="text-xl text-gray-600 mb-2">We couldn't load the collection right now.</p>
+                <p className="text-sm text-gray-500 mb-4">Please check your connection and try again.</p>
+                <Button variant="link" className="text-[#8B4513]" onClick={fetchProducts}>
+                  Try again
+                </Button>
+              </div>
+            ) : loading && products.length === 0 ? (
+              <div className="flex items-center justify-center py-20">
+                <div className="w-8 h-8 border-4 border-[#D4AF37] border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            ) : Object.values(groupedProducts).every((group) => group.length === 0) ? (
               <div className="text-center py-20 bg-white rounded-xl shadow-sm border border-gray-100">
                 <p className="text-xl text-gray-600 mb-4">No treasures found matching your criteria.</p>
                 <Button variant="link" className="text-[#8B4513]" onClick={resetFilters}>

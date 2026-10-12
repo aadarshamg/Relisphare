@@ -7,7 +7,7 @@ const Footer = () => {
   const { contactInfo } = useContactInfo();
 
   const address = contactInfo?.address || '114 BLDG NO 03 86 CENTRAL,\nANDHERI GHATKOPAR LINK RD,\nMumbai- 400086, Maharashtra';
-  const phone = contactInfo?.contact_phone || '6350213774';
+  const phone = contactInfo?.contact_phone || '+91 77386 08903';
   const supportEmail = contactInfo?.support_email || 'support@relicsphere.com';
   const contactEmail = contactInfo?.contact_email || 'contact@relicsphere.com';
   const siteName = contactInfo?.site_name || 'Relicsphere';
@@ -77,7 +77,7 @@ const Footer = () => {
                  <div className="bg-[#D4AF37]/10 p-2 rounded-full group-hover:bg-[#D4AF37]/20 transition-colors">
                    <Phone className="w-5 h-5 text-[#D4AF37] flex-shrink-0" />
                  </div>
-                <a href={`tel:${phone}`} className="hover:text-[#D4AF37] transition-colors">
+                <a href={`tel:${phone.replace(/\s+/g, '')}`} className="hover:text-[#D4AF37] transition-colors">
                   {phone}
                 </a>
               </li>

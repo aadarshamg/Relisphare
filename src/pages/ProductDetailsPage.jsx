@@ -73,7 +73,7 @@ const ProductDetailsPage = () => {
           {/* Images */}
           <div className="space-y-4">
             <div className="aspect-square bg-gray-100 rounded-xl overflow-hidden shadow-lg border relative">
-              {images.length > 0 ? images.map((img, idx) => (
+              {product.image_pending ? <div className="absolute inset-0 bg-gray-100 animate-pulse" /> : images.length > 0 ? images.map((img, idx) => (
                 <ProductImage key={img.id} src={img.image_url} alt={product.name} isActive={activeImage === idx} />
               )) : <ProductImage src={null} alt={product.name} isActive={true} />}
             </div>

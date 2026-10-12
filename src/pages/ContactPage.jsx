@@ -50,7 +50,7 @@ const ContactPage = () => {
   };
 
   const address = settings?.address || '114 BLDG NO 03 86 CENTRAL,\nANDHERI GHATKOPAR LINK RD,\nMumbai- 400086';
-  const phone = settings?.phone || '6350213774';
+  const phone = settings?.phone || '+91 77386 08903';
   const supportEmail = settings?.support_email || 'support@relicsphere.com';
 
   return (
@@ -85,7 +85,7 @@ const ContactPage = () => {
                 <div className="bg-[#F5E6D3] p-3 rounded-full flex-shrink-0"><Phone className="w-6 h-6 text-[#8B4513]" /></div>
                 <div>
                   <h3 className="font-serif font-bold text-[#2C2C2C] text-xl mb-2">Phone Support</h3>
-                  <a href={`tel:${phone}`} className="text-[#5C4033] font-medium text-lg hover:text-[#D4AF37]">{phone}</a>
+                  <a href={`tel:${phone.replace(/\s+/g, '')}`} className="text-[#5C4033] font-medium text-lg hover:text-[#D4AF37]">{phone}</a>
                 </div>
               </div>
             </div>

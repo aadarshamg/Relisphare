@@ -1,20 +1,60 @@
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import supabase from '@/lib/customSupabaseClient';
 
 const DataContext = createContext();
 
+const PRODUCT_LIST_FIELDS = 'id,name,description,price,category,stock,created_at';
+
 export const DataProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [productsError, setProductsError] = useState(null);
   const [orders, setOrders] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [settings, setSettings] = useState(null);
   const [loading, setLoading] = useState(true);
+  const productsRequestId = useRef(0);
 
-  const fetchProducts = async () => {
-    const { data, error } = await supabase.from('products').select('*').order('created_at', { ascending: false });
-    if (!error && data) setProducts(data);
-  };
+  // Some products store their photo inline as a multi-megabyte data URI, so the listing
+  // and normal image links load first and the inline photos are merged in afterwards.
+  const fetchInlineImages = useCallback(async (requestId) => {
+    const { data, error } = await supabase.from('products').select('id,image_url').like('image_url', 'data:%');
+    if (requestId !== productsRequestId.current) return;
+    if (error) console.error('Failed to load product photos:', error);
+    const imageById = new Map((data || []).map((row) => [row.id, row.image_url]));
+    setProducts((prev) => prev.map((p) => {
+      if (imageById.has(p.id)) return { ...p, image_url: imageById.get(p.id), image_pending: false };
+      return p.image_pending ? { ...p, image_pending: false } : p;
+    }));
+  }, []);
+
+  const fetchProducts = useCallback(async () => {
+    const requestId = ++productsRequestId.current;
+    try {
+      const [listing, links] = await Promise.all([
+        supabase.from('products').select(PRODUCT_LIST_FIELDS).order('created_at', { ascending: false }),
+        supabase.from('products').select('id,image_url').not('image_url', 'like', 'data:%')
+      ]);
+      if (listing.error) throw listing.error;
+      if (links.error) throw links.error;
+      if (requestId !== productsRequestId.current) return;
+
+      const linkById = new Map(links.data.map((row) => [row.id, row.image_url]));
+      setProducts((prev) => {
+        const prevById = new Map(prev.map((p) => [p.id, p]));
+        return listing.data.map((row) => {
+          if (linkById.has(row.id)) return { ...row, image_url: linkById.get(row.id) };
+          const known = prevById.get(row.id)?.image_url;
+          return known ? { ...row, image_url: known } : { ...row, image_url: null, image_pending: true };
+        });
+      });
+      setProductsError(null);
+      fetchInlineImages(requestId);
+    } catch (error) {
+      console.error('Failed to load products:', error);
+      setProductsError(error);
+    }
+  }, [fetchInlineImages]);
 
   const fetchOrders = async () => {
     const { data, error } = await supabase.from('orders').select('*').order('created_at', { ascending: false });
@@ -92,7 +132,7 @@ export const DataProvider = ({ children }) => {
 
   return (
     <DataContext.Provider value={{
-      products, getProducts, getProductById, addProduct, updateProduct, deleteProduct, fetchProducts,
+      products, productsError, getProducts, getProductById, addProduct, updateProduct, deleteProduct, fetchProducts,
       orders, getOrders, addOrder, updateOrderStatus,
       contacts, getContactSubmissions, addContactSubmission,
       settings, getSettings, updateSettings,

@@ -23,6 +23,8 @@ export const getOptimizedImageUrl = (originalUrl, width = 800, quality = 80, for
 
 export const getResponsiveImageSrcSet = (originalUrl, widths = [300, 600, 800, 1200]) => {
   if (!originalUrl) return '';
+  // Only CDN images can be resized; repeating any other URL per width just bloats the page
+  if (!originalUrl.includes('images.unsplash.com')) return undefined;
   return widths
     .map(w => `${getOptimizedImageUrl(originalUrl, w)} ${w}w`)
     .join(', ');

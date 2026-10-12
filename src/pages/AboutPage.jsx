@@ -7,7 +7,7 @@ import { useContactInfo } from '@/hooks/useContactInfo';
 const AboutPage = () => {
   const { contactInfo, loading } = useContactInfo();
 
-  const phone = contactInfo?.contact_phone || '6350213774';
+  const phone = contactInfo?.contact_phone || '+91 77386 08903';
   const supportEmail = contactInfo?.support_email || 'support@relicsphere.com';
   const contactEmail = contactInfo?.contact_email || 'contact@relicsphere.com';
 
@@ -126,7 +126,7 @@ const AboutPage = () => {
                  <div className="bg-[#FAF5EF] p-4 rounded-full">
                     <Phone className="w-6 h-6 text-[#8B4513]" />
                  </div>
-                 <a href={`tel:${phone}`} className="text-lg font-semibold text-[#2C2C2C] hover:text-[#D4AF37] transition-colors">
+                 <a href={`tel:${phone.replace(/\s+/g, '')}`} className="text-lg font-semibold text-[#2C2C2C] hover:text-[#D4AF37] transition-colors">
                    {phone}
                  </a>
                  <span className="text-sm text-gray-500">Call Us</span>

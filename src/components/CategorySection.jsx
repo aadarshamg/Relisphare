@@ -40,8 +40,11 @@ const CategorySection = ({ title, products }) => {
           return (
           <Link key={product.id} to={`/product/${product.id}`} className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col border border-gray-100">
             <div className="relative aspect-[4/3] responsive-image-container">
-              <img 
-                src={getOptimizedImageUrl(srcUrl, 400)} 
+              {product.image_pending ? (
+                <div className="w-full h-full bg-gray-100 animate-pulse" />
+              ) : (
+              <img
+                src={getOptimizedImageUrl(srcUrl, 400)}
                 srcSet={getResponsiveImageSrcSet(srcUrl, [300, 400, 600])}
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 alt={product.name || 'Product Image'} 
@@ -50,6 +53,7 @@ const CategorySection = ({ title, products }) => {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 image-lazy-loading" 
                 onError={(e) => { e.target.onerror = null; e.target.src = getOptimizedImageUrl(fallbackImg, 400); }}
               />
+              )}
               {product.stock <= 0 && (
                 <div className="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Sold Out</div>
               )}

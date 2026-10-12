@@ -1,7 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// Neither value can contain whitespace; a stray space or line break pasted into the
+// hosting dashboard makes Supabase reject every request with "Invalid API key".
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.replace(/\s+/g, '');
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY?.replace(/\s+/g, '');
 
 if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error(
