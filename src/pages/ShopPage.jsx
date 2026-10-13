@@ -66,11 +66,11 @@ const ShopPage = () => {
   );
 
   const priceStats = useMemo(() => {
-    if (!products || products.length === 0) return { min: 20000, max: 200000 };
+    if (!products || products.length === 0) return null;
     const prices = products.map((p) => p.price / 100);
     return {
-      min: Math.max(20000, Math.floor(Math.min(...prices))),
-      max: Math.min(200000, Math.ceil(Math.max(...prices)))
+      min: Math.floor(Math.min(...prices)),
+      max: Math.ceil(Math.max(...prices))
     };
   }, [products]);
 
@@ -185,10 +185,12 @@ const ShopPage = () => {
             />
           </div>
         </div>
-        <div className="flex justify-between text-xs text-gray-400 px-1">
-          <span>From INR {priceStats.min.toLocaleString('en-IN')}</span>
-          <span>To INR {priceStats.max.toLocaleString('en-IN')}</span>
-        </div>
+        {priceStats && (
+          <div className="flex justify-between text-xs text-gray-400 px-1">
+            <span>From INR {priceStats.min.toLocaleString('en-IN')}</span>
+            <span>To INR {priceStats.max.toLocaleString('en-IN')}</span>
+          </div>
+        )}
       </div>
 
       <div className="mb-6">

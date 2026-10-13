@@ -16,17 +16,26 @@ const ProductImage = memo(({ src, alt, isActive }) => {
   const fallbackSrc = 'https://images.unsplash.com/photo-1608062326349-42beaf01e920';
   const imgUrl = src || fallbackSrc;
   
+  // The whole photo is shown uncropped; a blurred copy fills the rest of the square frame.
+  // (.responsive-image-container is not used here: its position: relative overrides `absolute`.)
   return (
-    <div className={`absolute inset-0 transition-opacity duration-500 ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'} responsive-image-container`}>
-      <img 
-        src={getOptimizedImageUrl(imgUrl, 800)} 
+    <div className={`absolute inset-0 overflow-hidden bg-gray-100 transition-opacity duration-500 ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}>
+      <img
+        src={getOptimizedImageUrl(imgUrl, 400)}
+        alt=""
+        aria-hidden="true"
+        onError={(e) => { e.target.style.display = 'none'; }}
+        className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-60"
+      />
+      <img
+        src={getOptimizedImageUrl(imgUrl, 800)}
         srcSet={getResponsiveImageSrcSet(imgUrl, [400, 800, 1200])}
         sizes="(max-width: 768px) 100vw, 50vw"
         alt={alt || 'Product Image'} 
         loading="lazy" 
         onLoad={() => setIsLoaded(true)}
         onError={(e) => { e.target.onerror = null; e.target.src = getOptimizedImageUrl(fallbackSrc, 800); }}
-        className={`w-full h-full object-cover transition-opacity duration-300 ${isLoaded ? 'image-lazy-loaded' : 'image-lazy-loading'}`} 
+        className={`relative w-full h-full object-contain transition-opacity duration-300 ${isLoaded ? 'image-lazy-loaded' : 'image-lazy-loading'}`}
       />
     </div>
   );
